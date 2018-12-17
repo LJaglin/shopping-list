@@ -9,6 +9,7 @@ loadEventListeners();
 
 function loadEventListeners() {
     form.addEventListener('submit', addItem);
+    shoppingList.addEventListener('click', removeItem);
 }
 
 function addItem(e) {
@@ -36,5 +37,13 @@ function addItem(e) {
         itemInput.value = '';
 
         e.preventDefault();
+    }
+}
+
+function removeItem(e) {
+    if (e.target.parentElement.classList.contains('delete-item')) {
+        if (confirm('Remove item from the shopping list?')) {
+            e.target.parentElement.parentElement.remove();
+        }
     }
 }
