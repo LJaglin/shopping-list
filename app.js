@@ -8,8 +8,40 @@ const itemInput = document.querySelector('#item');
 loadEventListeners();
 
 function loadEventListeners() {
+    //When DOM is loaded invoke function getItems
+    document.addEventListener('DOMContentLoaded', getItems);
     form.addEventListener('submit', addItem);
     shoppingList.addEventListener('click', removeItem);
+}
+
+//Load items from local storage
+function getItems() {
+    let items;
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+
+    items.forEach(function(item) {
+        //create li element 
+        const li = document.createElement('li');
+        //add class
+        li.className = 'collection-item';
+        //create text node and append to created li
+        li.appendChild(document.createTextNode(item));
+        //create new link element
+        const link = document.createElement('a');
+        //add class to created link
+        link.className = 'delete-item secondary-content';
+        //add icon
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        //append the link to li
+        li.appendChild(link);
+        //append li to ul
+        shoppingList.appendChild(li);
+    });
+
 }
 
 function addItem(e) {
