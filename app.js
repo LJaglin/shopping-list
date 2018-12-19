@@ -33,11 +33,26 @@ function addItem(e) {
         //append li to ul
         shoppingList.appendChild(li);
 
+        //store item in local storage 
+        storeItemInLocalStorage(itemInput.value);
+
         //clear input
         itemInput.value = '';
 
         e.preventDefault();
     }
+}
+
+//store items in local storage
+function storeItemInLocalStorage(newItem) {
+    let items;
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    items.push(newItem);
+    localStorage.setItem('items', JSON.stringify(items));
 }
 
 function removeItem(e) {
