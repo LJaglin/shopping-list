@@ -59,6 +59,24 @@ function removeItem(e) {
     if (e.target.parentElement.classList.contains('delete-item')) {
         if (confirm('Remove item from the shopping list?')) {
             e.target.parentElement.parentElement.remove();
+            //remove item from local storage
+            removeItemFromLocalStorage(e.target.parentElement.parentElement);
         }
     }
+}
+
+function removeItemFromLocalStorage(itemToRemove) {
+    let items;
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+
+    items.forEach(function(item, index) {
+        if (itemToRemove.textContent === item) {
+            items.splice(index, 1);
+        }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
 }
