@@ -121,4 +121,10 @@ function clearShoppingList() {
            shoppingList.removeChild(shoppingList.firstChild);
         }
     }
+    //clear whole shopping list from local storage
+    clearShoppingListFromLocalStorage();
+}
+
+function clearShoppingListFromLocalStorage() {
+    localStorage.clear();
 }
