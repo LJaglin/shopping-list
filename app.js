@@ -1,7 +1,7 @@
 //Define user interface variable
 const form = document.querySelector('#item-form');
 const shoppingList = document.querySelector('.collection');
-const clearButton = document.querySelector('clear-items');
+const clearButton = document.querySelector('.clear-items');
 const filter = document.querySelector('#filter');
 const itemInput = document.querySelector('#item');
 
@@ -12,6 +12,8 @@ function loadEventListeners() {
     document.addEventListener('DOMContentLoaded', getItems);
     form.addEventListener('submit', addItem);
     shoppingList.addEventListener('click', removeItem);
+    //clear whole shopping list
+    clearButton.addEventListener('click', clearShoppingList);
 }
 
 //Load items from local storage
@@ -111,4 +113,12 @@ function removeItemFromLocalStorage(itemToRemove) {
         }
     });
     localStorage.setItem('items', JSON.stringify(items));
+}
+
+function clearShoppingList() {
+    if (confirm('Clear whole shopping list?')) {
+        while (shoppingList.firstChild) {
+           shoppingList.removeChild(shoppingList.firstChild);
+        }
+    }
 }
