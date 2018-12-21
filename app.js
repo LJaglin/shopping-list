@@ -14,6 +14,7 @@ function loadEventListeners() {
     shoppingList.addEventListener('click', removeItem);
     //clear whole shopping list
     clearButton.addEventListener('click', clearShoppingList);
+    filter.addEventListener('keyup', filterItems);
 }
 
 //Load items from local storage
@@ -127,4 +128,16 @@ function clearShoppingList() {
 
 function clearShoppingListFromLocalStorage() {
     localStorage.clear();
+}
+
+//filter through the shopping list
+function filterItems(e) {
+    const searchedItem = e.target.value.toLowerCase();
+    document.querySelectorAll('.collection-item').forEach(function(item) {
+        if (item.textContent.indexOf(searchedItem) != -1) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
