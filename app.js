@@ -120,9 +120,9 @@ function clearShoppingList() {
         while (shoppingList.firstChild) {
            shoppingList.removeChild(shoppingList.firstChild);
         }
+        //clear whole shopping list from local storage
+        clearShoppingListFromLocalStorage();
     }
-    //clear whole shopping list from local storage
-    clearShoppingListFromLocalStorage();
 }
 
 function clearShoppingListFromLocalStorage() {
